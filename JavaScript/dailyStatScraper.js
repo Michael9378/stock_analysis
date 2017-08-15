@@ -55,17 +55,19 @@ function parseCSV(csvContent, hasHeaderRow, rowDelimiter= "\n", colDelimiter= ",
 }
 
 var symbols = [];
+var index = 0;
 
 $.ajax({
 	type: "POST",
 	url: "http://projects.michaeljscott.net/stock_analysis/api/summary/get/",
 	success: function (response) {
 		symbols = JSON.parse(response);
-		recursiveTimeoutLoop(0);
+		recursiveTimeoutLoop(index);
 	}
  });
 
  function recursiveTimeoutLoop(index){
+	console.log("Index is: " + index);
 	var data;
 	var curSymbol = symbols[index].company_symbol;
 	var baseUrl = "http://www.nasdaq.com/symbol/"+curSymbol.toLowerCase()+"/historical";
