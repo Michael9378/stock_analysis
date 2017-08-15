@@ -96,6 +96,11 @@ function afterResponse(data, curSymbol){
 		var commaRE = new RegExp(',', 'g');
 
 		// if the last data is from today, it will be in the format HH:MM so check for that and just grab the current day
+		if(typeof data[i].date == 'undefined'){
+			console.log("Date undefined.");
+			console.log(data[i]);
+			return;
+		}
 		if(data[i].date.indexOf(":") == -1 )
 			formatData[i].stats_date = data[i].date.replace(slashRE, "-");
 		else
