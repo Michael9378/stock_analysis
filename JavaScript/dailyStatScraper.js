@@ -57,6 +57,7 @@ function parseCSV(csvContent, hasHeaderRow, rowDelimiter= "\n", colDelimiter= ",
 var symbols = [];
 var formatData = []
 var index = 0;
+var errorCount = 0;
 
 $.ajax({
 	type: "POST",
@@ -80,9 +81,19 @@ $.ajax({
 		data: submitString,
 		contentType: "application/json",
 		success: function (response) {
+			errorCount = 0;
 			data = parseCSV(response, true);
 			afterResponse(data, curSymbol);
 			index++;
+			recursiveTimeoutLoop(index);
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown){
+			console.log("ERROR!");
+			console.log(XMLHttpRequest);
+			console.log(textStatus);
+			console.log(errorThrown);
+			if(errorCount >= 5)
+				index++;
 			recursiveTimeoutLoop(index);
 		}
 	});
