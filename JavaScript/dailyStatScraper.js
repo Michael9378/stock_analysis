@@ -55,6 +55,7 @@ function parseCSV(csvContent, hasHeaderRow, rowDelimiter= "\n", colDelimiter= ",
 }
 
 var symbols = [];
+var formatData = []
 var index = 0;
 
 $.ajax({
@@ -67,9 +68,9 @@ $.ajax({
  });
 
  function recursiveTimeoutLoop(index){
-	console.log("Index is: " + index);
 	var data;
 	var curSymbol = symbols[index].company_symbol;
+	console.log("Current stock: " + curSymbol + " " + index + "/" + symbols.length);
 	var baseUrl = "http://www.nasdaq.com/symbol/"+curSymbol.toLowerCase()+"/historical";
 	var submitString = "10y|true|"+curSymbol;
 
@@ -82,7 +83,7 @@ $.ajax({
 			data = parseCSV(response, true);
 			afterResponse(data, curSymbol);
 			index++;
-			// recursiveTimeoutLoop(index);
+			recursiveTimeoutLoop(index);
 		}
 	});
  }
