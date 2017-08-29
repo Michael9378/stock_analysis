@@ -8,3 +8,23 @@ for marking highs and lows
 alternatively to the date range, you are looking for "This date is the highest date within X days forward or backward"
 In the above case, X is 7.
 	
+----------------------------------------
+
+Start by picking a low point
+Make sure end point is between 10 and 30 days after low
+Order next 10-30 days by highest values first
+First point found by this ordering that has a slope of at least .5 is the winner
+
+----------------------------------------
+
+Need to find when to buy (pattern triggered) and when to exit (loss triggered)
+
+When to buy: use clustering of previous data to look for patterns prior to run-ups
+When to sell: When stock has dropped by X percent, where X is a 75% historical gaurentee that the stock won't return to that price within 5 days (differentiator between toe-kick and down-turn) or won't return in enough time to make .5% profit for 1 day slope possible..?
+
+----------------------------------------
+
+Within double bounded STD...
+1.15 STD = 75% Confidence
+1.20 STD = 77% Confidence
+2.00 STD = 95% Confidence
